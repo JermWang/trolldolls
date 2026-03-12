@@ -9,11 +9,13 @@ export const metadata: Metadata = {
     title: "TROLLS — find ur inner troll",
     description: "every @ gets a troll. big hair. tiny chaos.",
     type: "website",
+    images: [{ url: "/trolls/trolls-banner.png" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "TROLLS",
     description: "type ur handle. get a troll. its that simple.",
+    images: ["/trolls/trolls-banner.png"],
   },
 };
 
