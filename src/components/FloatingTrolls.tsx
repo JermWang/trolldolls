@@ -2,14 +2,17 @@
 
 import Image from "next/image";
 
-// Trolls 1-4 for floating background (KOLs use 5-9)
+// Full collection of all 9 trolls floating across the screen
 const FLOATING_TROLLS = [
-  { src: "/trolls/troll-classic-1.png", size: 90, top: "10%", duration: 25, delay: 0 },
-  { src: "/trolls/troll-classic-2.png", size: 75, top: "35%", duration: 30, delay: 5 },
-  { src: "/trolls/troll-classic-3.png", size: 100, top: "60%", duration: 22, delay: 10 },
-  { src: "/trolls/troll-classic-4.png", size: 65, top: "20%", duration: 28, delay: 15 },
-  { src: "/trolls/troll-classic-1.png", size: 80, top: "75%", duration: 32, delay: 8 },
-  { src: "/trolls/troll-classic-2.png", size: 70, top: "45%", duration: 26, delay: 18 },
+  { src: "/trolls/troll-classic-1.png", size: 90, top: "8%", duration: 26, delay: 0 },
+  { src: "/trolls/troll-classic-2.png", size: 75, top: "22%", duration: 30, delay: 3 },
+  { src: "/trolls/troll-classic-3.png", size: 100, top: "55%", duration: 23, delay: 7 },
+  { src: "/trolls/troll-classic-4.png", size: 65, top: "38%", duration: 28, delay: 11 },
+  { src: "/trolls/troll-classic-5.png", size: 85, top: "72%", duration: 32, delay: 5 },
+  { src: "/trolls/troll-classic-6.png", size: 70, top: "15%", duration: 27, delay: 14 },
+  { src: "/trolls/troll-classic-7.png", size: 95, top: "48%", duration: 25, delay: 9 },
+  { src: "/trolls/troll-classic-8.png", size: 55, top: "82%", duration: 34, delay: 17 },
+  { src: "/trolls/troll-classic-9.png", size: 80, top: "65%", duration: 29, delay: 2 },
 ];
 
 export default function FloatingTrolls() {
