@@ -153,42 +153,39 @@ html {
 /* Rainbow text - animated gradient with bloom */
 @keyframes rainbow-shift {
   0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: -50% 56%;
+    background-position: 0px 50%;
   }
   100% {
-    background-position: -100% 50%;
+    background-position: 336px 50%;
   }
 }
 
 .rainbow-text {
-  background: linear-gradient(
+  background-image: repeating-linear-gradient(
     90deg,
-    #FF2D2D 0%,
-    #FF6B35 8.33%,
-    #FFD700 16.66%,
-    #32CD32 25%,
-    #4488FF 33.33%,
-    #9B5DE5 41.66%,
-    #FF69B4 50%,
-    #FF2D2D 58.33%,
-    #FF6B35 66.66%,
-    #FFD700 75%,
-    #32CD32 83.33%,
-    #4488FF 91.66%,
-    #9B5DE5 96%,
-    #FF69B4 100%
+    #FF2D2D 0px,
+    #FF2D2D 48px,
+    #FF6B35 48px,
+    #FF6B35 96px,
+    #FFD700 96px,
+    #FFD700 144px,
+    #32CD32 144px,
+    #32CD32 192px,
+    #4488FF 192px,
+    #4488FF 240px,
+    #9B5DE5 240px,
+    #9B5DE5 288px,
+    #FF69B4 288px,
+    #FF69B4 336px
   ) !important;
-  background-size: 200% 100% !important;
+  background-size: auto 100% !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
   color: transparent !important;
   display: inline-block;
   will-change: background-position;
-  animation: rainbow-shift 4.8s linear infinite !important;
+  animation: rainbow-shift 2.4s linear infinite !important;
 }
 
 .rainbow-title {
