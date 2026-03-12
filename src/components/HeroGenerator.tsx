@@ -140,17 +140,17 @@ export default function HeroGenerator() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="space-y-4"
+                className="space-y-5"
               >
-                <div className="bg-white wobbly-border crayon-shadow p-5 space-y-4">
+                <div className="bg-white/95 border-2 border-black/15 shadow-[0_12px_30px_rgba(0,0,0,0.12)] rounded-2xl p-6 space-y-5 backdrop-blur-sm">
                   {/* Question mark placeholder PFP */}
                   <div className="flex justify-center">
-                    <div className="w-40 h-40 bg-yellow/30 border-4 border-dashed border-black/30 rounded-2xl flex items-center justify-center rotate-[1deg]">
-                      <span className="text-7xl animate-wobble-slow select-none">❓</span>
+                    <div className="w-36 h-36 bg-neutral-50 border border-black/10 rounded-2xl flex items-center justify-center">
+                      <span className="text-6xl select-none">❓</span>
                     </div>
                   </div>
-                  <p className="text-center text-black/40 font-bold text-sm" style={{ fontFamily: "'Comic Neue', cursive" }}>
-                    ur troll is waiting...
+                  <p className="text-center text-black/50 font-semibold text-sm" style={{ fontFamily: "'Comic Neue', cursive" }}>
+                    Enter your handle to generate your troll portrait.
                   </p>
 
                   <div className="relative">
@@ -161,7 +161,7 @@ export default function HeroGenerator() {
                       value={handle}
                       onChange={(e) => setHandle(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && generate()}
-                      className="w-full pl-10 pr-4 py-3.5 bg-yellow/30 border-3 border-black text-black text-lg font-bold placeholder:text-black/30 focus:outline-none focus:bg-yellow/50 transition-all rounded-lg"
+                      className="w-full pl-10 pr-4 py-3.5 bg-white border-2 border-black/20 text-black text-lg font-bold placeholder:text-black/35 rounded-xl focus:outline-none focus:border-blue focus:ring-2 focus:ring-blue/20 transition-all"
                       style={{ fontFamily: "'Comic Neue', cursive" }}
                     />
                   </div>
@@ -169,15 +169,11 @@ export default function HeroGenerator() {
                   <button
                     onClick={generate}
                     disabled={!handle.replace(/^@/, "").trim()}
-                    className="w-full py-4 bg-pink text-white text-xl font-bold border-3 border-black crayon-shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-x-[4px] active:translate-y-[4px] disabled:opacity-30 disabled:cursor-not-allowed rounded-lg"
+                    className="w-full py-3.5 bg-black text-white text-base md:text-lg font-bold border-2 border-black/70 shadow-[0_6px_16px_rgba(0,0,0,0.25)] hover:bg-black/90 transition-all disabled:opacity-30 disabled:cursor-not-allowed rounded-xl"
                   >
                     MAKE MY TROLL
                   </button>
                 </div>
-
-                <p className="text-sm text-black/50 font-bold" style={{ fontFamily: "'Comic Neue', cursive" }}>
-                  same handle = same troll. always. its deterministic bb
-                </p>
 
                 <ContractCopy />
               </motion.div>
