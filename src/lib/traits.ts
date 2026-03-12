@@ -21,49 +21,27 @@ export type RarityTier = "Common" | "Uncommon" | "Rare" | "Ultra Rare" | "Legend
 
 const HAIR_COLORS = [
   "neon pink",
-  "bubblegum pink",
-  "fire red",
-  "orange blast",
   "electric blue",
-  "royal blue",
-  "lemon yellow",
   "lime green",
-  "lavender",
-  "pastel pink",
-  "frost white",
-  "silver mist",
-  "rainbow blend",
-  "duo-tone chaos",
-  "galaxy fade",
-  "black with neon tips",
-  "coral sunset",
-  "mint green",
-  "deep violet",
-  "golden honey",
+  "bright orange",
+  "lavender purple",
+  "bubblegum pink",
+  "rainbow",
 ];
 
 const HAIR_SHAPES = [
   "perfect vertical spike",
-  "soft rounded tower",
-  "windblown lean",
-  "wild static burst",
-  "split spike",
-  "curved swoop",
-  "fluffy chaos spike",
-  "ultra-straight collector spike",
-  "slightly messy vintage frizz",
-  "stacked high volume cone",
+  "fluffy tower",
+  "slightly windblown spike",
+  "messy vintage frizz",
+  "soft rounded spike",
 ];
 
 const EYE_VARIANTS = [
-  "classic bead eyes",
-  "sleepy eyes",
-  "mischievous eyes",
-  "glossy big-eyed",
-  "sparkle-eyed",
-  "tiny smirk",
-  "pure classic smile",
-  "wide wonder eyes",
+  "classic toy smile",
+  "mischievous playful smile",
+  "happy cheerful smile",
+  "relaxed sleepy eyes",
 ];
 
 const BELLY_GEMS = [
