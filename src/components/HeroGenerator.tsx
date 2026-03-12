@@ -7,6 +7,7 @@ import TrollCard from "./TrollCard";
 import TraitChips from "./TraitChips";
 import { generateTraitRecipe, TrollTraits } from "@/lib/traits";
 import { LOADING_MESSAGES } from "@/lib/gallery-data";
+import ContractCopy from "./ContractCopy";
 
 type GeneratorState = "idle" | "loading" | "done";
 
@@ -139,6 +140,8 @@ export default function HeroGenerator() {
                 <p className="text-sm text-black/50 font-bold" style={{ fontFamily: "'Comic Neue', cursive" }}>
                   same handle = same troll. always. its deterministic bb
                 </p>
+
+                <ContractCopy />
               </motion.div>
             )}
 
