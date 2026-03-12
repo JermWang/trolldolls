@@ -42,10 +42,26 @@ function hairFragment(traits: TrollTraits): string {
   return `Hair color: ${traits.hairColor}. Hair shape: ${traits.hairShape}. Expression: ${traits.eyeVariant}.`;
 }
 
+function specialTraitsFragment(traits: TrollTraits): string {
+  if (traits.specialTraits.length === 0) return "";
+  return `Special features: ${traits.specialTraits.join(", ")}.`;
+}
+
+function gemFragment(traits: TrollTraits): string {
+  if (traits.bellyGem === "none") return "";
+  return `Belly gem: small ${traits.bellyGem} embedded in the troll's belly.`;
+}
+
 // ── Build Full Prompt ───────────────────────────────────────
 
 export function buildPromptFromTraits(traits: TrollTraits): string {
-  return [MASTER_PROMPT, hairFragment(traits)].join("\n\n");
+  const fragments = [
+    MASTER_PROMPT,
+    hairFragment(traits),
+    gemFragment(traits),
+    specialTraitsFragment(traits),
+  ].filter(Boolean);
+  return fragments.join("\n\n");
 }
 
 // ── Example Prompt Templates ────────────────────────────────

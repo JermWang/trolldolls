@@ -47,11 +47,15 @@ async function generateWithReferenceEdits({
   model,
   prompt,
   referenceUrls,
+  size,
+  quality,
 }: {
   apiKey: string;
   model: string;
   prompt: string;
   referenceUrls: string[];
+  size: string;
+  quality: string;
 }) {
   const refs = await fetchReferenceImages(referenceUrls);
   if (refs.length === 0) {
@@ -61,8 +65,8 @@ async function generateWithReferenceEdits({
   const form = new FormData();
   form.append("model", model);
   form.append("prompt", prompt);
-  form.append("size", "1024x1024");
-  form.append("quality", "high");
+  form.append("size", size);
+  form.append("quality", quality);
 
   refs.forEach((ref, i) => {
     form.append("image[]", ref.blob, `og-troll-ref-${i + 1}.png`);
@@ -98,10 +102,14 @@ async function generateWithPromptOnly({
   apiKey,
   model,
   prompt,
+  size,
+  quality,
 }: {
   apiKey: string;
   model: string;
   prompt: string;
+  size: string;
+  quality: string;
 }) {
   const response = await fetch("https://api.openai.com/v1/images/generations", {
     method: "POST",
@@ -112,8 +120,8 @@ async function generateWithPromptOnly({
     body: JSON.stringify({
       model,
       prompt,
-      size: "1024x1024",
-      quality: "high",
+      size,
+      quality,
     }),
   });
 
@@ -162,6 +170,8 @@ export async function POST(req: NextRequest) {
 
     const apiKey = process.env.OPENAI_API_KEY;
     const imageModel = process.env.OPENAI_IMAGE_MODEL || "gpt-image-1";
+    const imageSize = process.env.OPENAI_IMAGE_SIZE || "1024x1024";
+    const imageQuality = process.env.OPENAI_IMAGE_QUALITY || "medium";
 
     let imageDataUrl: string | null = null;
     let imageError: string | null = null;
@@ -175,6 +185,8 @@ export async function POST(req: NextRequest) {
         model: imageModel,
         prompt: styledPrompt,
         referenceUrls,
+        size: imageSize,
+        quality: imageQuality,
       });
 
       if (editResult.imageDataUrl) {
@@ -184,6 +196,8 @@ export async function POST(req: NextRequest) {
           apiKey,
           model: imageModel,
           prompt: styledPrompt,
+          size: imageSize,
+          quality: imageQuality,
         });
 
         imageDataUrl = fallbackResult.imageDataUrl;

@@ -27,6 +27,15 @@ const HAIR_COLORS = [
   "lavender purple",
   "bubblegum pink",
   "rainbow",
+  "hot magenta",
+  "cyber teal",
+  "sunset gradient orange-to-pink",
+  "cotton candy pastel",
+  "toxic green",
+  "deep violet",
+  "golden blonde",
+  "cherry red",
+  "ocean blue ombre",
 ];
 
 const HAIR_SHAPES = [
@@ -35,6 +44,11 @@ const HAIR_SHAPES = [
   "slightly windblown spike",
   "messy vintage frizz",
   "soft rounded spike",
+  "wild explosion burst",
+  "sleek swept back",
+  "dual split spikes",
+  "curly perm tower",
+  "mohawk ridge",
 ];
 
 const EYE_VARIANTS = [
@@ -42,6 +56,10 @@ const EYE_VARIANTS = [
   "mischievous playful smile",
   "happy cheerful smile",
   "relaxed sleepy eyes",
+  "wide-eyed surprised look",
+  "sassy wink",
+  "dreamy half-closed eyes",
+  "excited sparkle eyes",
 ];
 
 const BELLY_GEMS = [
