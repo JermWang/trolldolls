@@ -24,6 +24,7 @@ export default function FloatingTrolls() {
           className="absolute animate-float-across"
           style={{
             top: troll.top,
+            left: 0,
             width: troll.size,
             height: troll.size,
             animationDuration: `${troll.duration}s`,

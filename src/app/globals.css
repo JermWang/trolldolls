@@ -228,10 +228,12 @@ html {
 /* Floating trolls - drift across screen */
 @keyframes float-across {
   0% {
-    transform: translateX(-150px) rotate(-5deg);
+    transform: translateX(calc(-100% - 50px)) rotate(-5deg);
+    opacity: 1;
   }
   100% {
     transform: translateX(calc(100vw + 150px)) rotate(5deg);
+    opacity: 1;
   }
 }
 
@@ -252,6 +254,8 @@ html {
 
 .animate-float-across {
   animation: float-across linear infinite;
+  animation-fill-mode: backwards;
+  opacity: 0;
 }
 
 .animate-float-bob {
