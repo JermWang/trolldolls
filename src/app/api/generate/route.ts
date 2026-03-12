@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { generateTraitRecipe } from "@/lib/traits";
 import { buildPromptFromTraits, NEGATIVE_PROMPT } from "@/lib/prompts";
 
+export const runtime = "nodejs";
+
 function buildReferenceUrls() {
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
@@ -23,6 +25,114 @@ Match the exact collectible-vintage look, proportions, material quality, and toy
 ${refs.map((url) => `- ${url}`).join("\n")}
 
 Do not create a modern/cartoon reinterpretation. Keep it photoreal collectible toy style.`;
+}
+
+async function fetchReferenceImages(referenceUrls: string[], maxReferences = 4) {
+  const selectedUrls = referenceUrls.slice(0, maxReferences);
+
+  const fetched = await Promise.all(
+    selectedUrls.map(async (url) => {
+      const res = await fetch(url);
+      if (!res.ok) return null;
+      const blob = await res.blob();
+      return { url, blob };
+    })
+  );
+
+  return fetched.filter((item): item is { url: string; blob: Blob } => item !== null);
+}
+
+async function generateWithReferenceEdits({
+  apiKey,
+  model,
+  prompt,
+  referenceUrls,
+}: {
+  apiKey: string;
+  model: string;
+  prompt: string;
+  referenceUrls: string[];
+}) {
+  const refs = await fetchReferenceImages(referenceUrls);
+  if (refs.length === 0) {
+    return { imageDataUrl: null, error: "No reference images could be loaded for edit conditioning" };
+  }
+
+  const form = new FormData();
+  form.append("model", model);
+  form.append("prompt", prompt);
+  form.append("size", "1024x1024");
+  form.append("quality", "high");
+
+  refs.forEach((ref, i) => {
+    form.append("image[]", ref.blob, `og-troll-ref-${i + 1}.png`);
+  });
+
+  const response = await fetch("https://api.openai.com/v1/images/edits", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: form,
+  });
+
+  if (!response.ok) {
+    const failureText = await response.text();
+    return {
+      imageDataUrl: null,
+      error: `OpenAI image edit failed (${response.status}): ${failureText.slice(0, 240)}`,
+    };
+  }
+
+  const data = await response.json();
+  const b64 = data?.data?.[0]?.b64_json;
+
+  if (!b64) {
+    return { imageDataUrl: null, error: "Image edit API returned no image payload" };
+  }
+
+  return { imageDataUrl: `data:image/png;base64,${b64}`, error: null };
+}
+
+async function generateWithPromptOnly({
+  apiKey,
+  model,
+  prompt,
+}: {
+  apiKey: string;
+  model: string;
+  prompt: string;
+}) {
+  const response = await fetch("https://api.openai.com/v1/images/generations", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model,
+      prompt,
+      size: "1024x1024",
+      quality: "high",
+    }),
+  });
+
+  if (!response.ok) {
+    const failureText = await response.text();
+    return {
+      imageDataUrl: null,
+      error: `OpenAI image generation failed (${response.status}): ${failureText.slice(0, 240)}`,
+    };
+  }
+
+  const data = await response.json();
+  const b64 = data?.data?.[0]?.b64_json;
+
+  if (!b64) {
+    return { imageDataUrl: null, error: "Image API returned no image payload" };
+  }
+
+  return { imageDataUrl: `data:image/png;base64,${b64}`, error: null };
 }
 
 export async function POST(req: NextRequest) {
@@ -57,32 +167,29 @@ export async function POST(req: NextRequest) {
     let imageError: string | null = null;
 
     if (apiKey) {
-      const openAiResponse = await fetch("https://api.openai.com/v1/images/generations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: imageModel,
-          prompt: buildOpenAiPrompt(prompt),
-          size: "1024x1024",
-          quality: "high",
-        }),
+      const styledPrompt = buildOpenAiPrompt(prompt);
+      const referenceUrls = buildReferenceUrls();
+
+      const editResult = await generateWithReferenceEdits({
+        apiKey,
+        model: imageModel,
+        prompt: styledPrompt,
+        referenceUrls,
       });
 
-      if (openAiResponse.ok) {
-        const data = await openAiResponse.json();
-        const b64 = data?.data?.[0]?.b64_json;
-
-        if (b64) {
-          imageDataUrl = `data:image/png;base64,${b64}`;
-        } else {
-          imageError = "Image API returned no image payload";
-        }
+      if (editResult.imageDataUrl) {
+        imageDataUrl = editResult.imageDataUrl;
       } else {
-        const failureText = await openAiResponse.text();
-        imageError = `OpenAI image generation failed (${openAiResponse.status}): ${failureText.slice(0, 240)}`;
+        const fallbackResult = await generateWithPromptOnly({
+          apiKey,
+          model: imageModel,
+          prompt: styledPrompt,
+        });
+
+        imageDataUrl = fallbackResult.imageDataUrl;
+        imageError = fallbackResult.error
+          ? `${editResult.error || "Reference edit path failed"}; ${fallbackResult.error}`
+          : `Reference edit path unavailable; used prompt-only generation.`;
       }
     } else {
       imageError = "OPENAI_API_KEY is not configured";
