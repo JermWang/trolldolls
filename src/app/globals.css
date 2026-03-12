@@ -150,13 +150,21 @@ html {
   transform: scale(1.1) rotate(3deg);
 }
 
-/* Rainbow text */
+/* Rainbow text - animated gradient with bloom */
+@keyframes rainbow-shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
 .rainbow-text {
-  background: linear-gradient(90deg, #FF2D2D, #FF6B35, #FFD700, #32CD32, #4488FF, #9B5DE5, #FF69B4) !important;
+  background: linear-gradient(90deg, #FF2D2D, #FF6B35, #FFD700, #32CD32, #4488FF, #9B5DE5, #FF69B4, #FF2D2D, #FF6B35, #FFD700, #32CD32, #4488FF, #9B5DE5, #FF69B4) !important;
+  background-size: 200% 100% !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
   color: transparent !important;
+  animation: rainbow-shift 4s linear infinite !important;
+  filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.4)) drop-shadow(0 0 40px rgba(148, 93, 229, 0.3)) drop-shadow(0 0 60px rgba(255, 215, 0, 0.2));
 }
 
 /* Hide scrollbar for gallery strip */
