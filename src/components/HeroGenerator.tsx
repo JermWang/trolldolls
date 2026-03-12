@@ -114,8 +114,11 @@ export default function HeroGenerator() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-7xl md:text-[12rem] font-black leading-[0.85] mb-8 tracking-tight rainbow-bloom" style={{ fontFamily: "'Fredoka', sans-serif" }}>
-            <span className="rainbow-text">TROLLS</span>
+          <h1 className="text-7xl md:text-[12rem] font-black leading-[0.85] mb-8 tracking-tight" style={{ fontFamily: "'Fredoka', sans-serif" }}>
+            <span className="rainbow-title" aria-label="TROLLS">
+              <span className="rainbow-text rainbow-text-glow" aria-hidden="true">TROLLS</span>
+              <span className="rainbow-text rainbow-text-main">TROLLS</span>
+            </span>
           </h1>
 
           <p className="text-lg md:text-xl text-black/60 max-w-md mx-auto mb-8 font-medium" style={{ fontFamily: "'Comic Neue', cursive" }}>

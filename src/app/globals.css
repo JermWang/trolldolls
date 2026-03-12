@@ -153,21 +153,39 @@ html {
 /* Rainbow text - animated gradient with bloom */
 @keyframes rainbow-shift {
   0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
+  100% { background-position: 300% 50%; }
 }
 
 .rainbow-text {
   background: linear-gradient(90deg, #FF2D2D, #FF6B35, #FFD700, #32CD32, #4488FF, #9B5DE5, #FF69B4, #FF2D2D, #FF6B35, #FFD700, #32CD32, #4488FF, #9B5DE5, #FF69B4) !important;
-  background-size: 200% 100% !important;
+  background-size: 300% 100% !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
   color: transparent !important;
-  animation: rainbow-shift 3s linear infinite !important;
+  display: inline-block;
+  will-change: background-position;
+  animation: rainbow-shift 6s linear infinite !important;
 }
 
-.rainbow-bloom {
-  text-shadow: 0 0 20px rgba(255, 105, 180, 0.5), 0 0 40px rgba(148, 93, 229, 0.35), 0 0 80px rgba(255, 215, 0, 0.25);
+.rainbow-title {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+}
+
+.rainbow-text-main {
+  position: relative;
+  z-index: 2;
+}
+
+.rainbow-text-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  filter: blur(10px);
+  opacity: 0.75;
 }
 
 /* Hide scrollbar for gallery strip */
