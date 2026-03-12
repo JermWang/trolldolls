@@ -69,7 +69,7 @@ export default function HeroGenerator() {
   const shareOnX = () => {
     if (!traits) return;
     const text = encodeURIComponent(
-      `lol i got trollified\n\nim a "${traits.archetype}" with ${traits.hairColor} hair!!! big hair energy\n\nget urs`
+      `lol i got trollified\n\nim a "${traits.vibe}" with ${traits.hairColor} hair!!! big hair energy\n\nget urs`
     );
     const url = encodeURIComponent("https://trolldolls.fun");
     window.open(`https://x.com/intent/tweet?text=${text}&url=${url}`, "_blank");
@@ -243,7 +243,7 @@ export default function HeroGenerator() {
 
                     <div className="bg-yellow/50 border-3 border-black px-4 py-2 rounded-lg rotate-[-1deg]">
                       <p className="text-lg font-bold text-black">
-                        &quot;{traits.archetype}&quot;
+                        &quot;{traits.vibe}&quot;
                       </p>
                     </div>
 

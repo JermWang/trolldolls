@@ -3,110 +3,29 @@
 // Handle -> Seed -> Trait Recipe -> Prompt Ingredients
 // ============================================================
 
+import traitPools from "./trait-pools.json";
+
 export interface TrollTraits {
   handle: string;
   seed: number;
   hairColor: string;
-  hairShape: string;
-  eyeVariant: string;
+  hairStyle: string;
+  hat: string;
+  eyeStyle: string;
+  mouth: string;
+  costume: string;
+  accessory: string;
   bellyGem: string;
+  background: string;
+  specialEffect: string;
+  skinTone: string;
+  vibe: string;
+  memeTrait: string;
   rarity: RarityTier;
   specialTraits: string[];
-  archetype: string;
 }
 
 export type RarityTier = "Common" | "Uncommon" | "Rare" | "Ultra Rare" | "Legendary";
-
-// ── Trait Pools ──────────────────────────────────────────────
-
-const HAIR_COLORS = [
-  "neon pink",
-  "electric blue",
-  "lime green",
-  "bright orange",
-  "lavender purple",
-  "bubblegum pink",
-  "rainbow",
-  "hot magenta",
-  "cyber teal",
-  "sunset gradient orange-to-pink",
-  "cotton candy pastel",
-  "toxic green",
-  "deep violet",
-  "golden blonde",
-  "cherry red",
-  "ocean blue ombre",
-];
-
-const HAIR_SHAPES = [
-  "perfect vertical spike",
-  "fluffy tower",
-  "slightly windblown spike",
-  "messy vintage frizz",
-  "soft rounded spike",
-  "wild explosion burst",
-  "sleek swept back",
-  "dual split spikes",
-  "curly perm tower",
-  "mohawk ridge",
-];
-
-const EYE_VARIANTS = [
-  "classic toy smile",
-  "mischievous playful smile",
-  "happy cheerful smile",
-  "relaxed sleepy eyes",
-  "wide-eyed surprised look",
-  "sassy wink",
-  "dreamy half-closed eyes",
-  "excited sparkle eyes",
-];
-
-const BELLY_GEMS = [
-  "ruby",
-  "sapphire",
-  "emerald",
-  "diamond",
-  "amethyst",
-  "heart gem",
-  "star gem",
-  "moon gem",
-  "chrome gem",
-  "none",
-  "none",
-  "none",
-];
-
-const SPECIAL_TRAITS = [
-  "metallic vinyl finish",
-  "translucent hair",
-  "frost-tipped hair",
-  "rainbow aura",
-  "golden body",
-  "pearlescent body",
-  "dual-gem trait",
-  "glitch troll variant",
-  "moonlit background",
-  "glitter halo",
-  "chrome charm",
-  "confetti backdrop",
-  "neon edge light",
-  "holographic sheen",
-  "stardust particles",
-];
-
-const ARCHETYPES = [
-  "Classic Collector",
-  "Neon Rebel",
-  "Pastel Dreamer",
-  "Chaos Agent",
-  "Luxury Edition",
-  "Cyber Punk",
-  "Vintage OG",
-  "Sunset Cruiser",
-  "Mystic Sage",
-  "Party Animal",
-];
 
 // ── Deterministic Seed ──────────────────────────────────────
 
@@ -157,7 +76,7 @@ function assignSpecialTraits(rarity: RarityTier, rng: () => number): string[] {
   };
   const count = counts[rarity];
   const traits: string[] = [];
-  const pool = [...SPECIAL_TRAITS];
+  const pool = [...traitPools.specialEffects];
   for (let i = 0; i < count && pool.length > 0; i++) {
     const idx = Math.floor(rng() * pool.length);
     traits.push(pool.splice(idx, 1)[0]);
@@ -174,16 +93,29 @@ export function generateTraitRecipe(handle: string): TrollTraits {
   const rarity = calculateRarity(rng);
   const specialTraits = assignSpecialTraits(rarity, rng);
 
+  // Meme traits only for Rare+
+  const memeTrait = rarity === "Common" || rarity === "Uncommon" 
+    ? "none" 
+    : pick(traitPools.memeTraits, rng);
+
   return {
     handle: handle.replace(/^@/, "").toLowerCase().trim(),
     seed,
-    hairColor: pick(HAIR_COLORS, rng),
-    hairShape: pick(HAIR_SHAPES, rng),
-    eyeVariant: pick(EYE_VARIANTS, rng),
-    bellyGem: pick(BELLY_GEMS, rng),
+    hairColor: pick(traitPools.hairColors, rng),
+    hairStyle: pick(traitPools.hairStyles, rng),
+    hat: pick(traitPools.hats, rng),
+    eyeStyle: pick(traitPools.eyeStyles, rng),
+    mouth: pick(traitPools.mouths, rng),
+    costume: pick(traitPools.costumes, rng),
+    accessory: pick(traitPools.accessories, rng),
+    bellyGem: pick(traitPools.bellyGems, rng),
+    background: pick(traitPools.backgrounds, rng),
+    specialEffect: rarity === "Common" ? "none" : pick(traitPools.specialEffects, rng),
+    skinTone: pick(traitPools.skinTones, rng),
+    vibe: pick(traitPools.vibes, rng),
+    memeTrait,
     rarity,
     specialTraits,
-    archetype: pick(ARCHETYPES, rng),
   };
 }
 
@@ -221,10 +153,12 @@ export const RARITY_CONFIG: Record<RarityTier, { color: string; label: string; g
 
 export function getTraitSummary(traits: TrollTraits) {
   const items = [
-    { label: "Hair", value: `${traits.hairColor}, ${traits.hairShape}` },
-    { label: "Eyes", value: traits.eyeVariant },
+    { label: "Hair", value: `${traits.hairColor}, ${traits.hairStyle}` },
+    { label: "Eyes", value: traits.eyeStyle },
+    { label: "Hat", value: traits.hat },
+    { label: "Costume", value: traits.costume },
     { label: "Gem", value: traits.bellyGem },
-    { label: "Vibe", value: traits.archetype },
+    { label: "Vibe", value: traits.vibe },
   ];
   return items;
 }

@@ -69,8 +69,8 @@ export default function TrollCard({ traits, size = "md", animate = true }: Troll
           <ellipse
             cx="150"
             cy="85"
-            rx={getHairWidth(traits.hairShape)}
-            ry={getHairHeight(traits.hairShape)}
+            rx={getHairWidth(traits.hairStyle)}
+            ry={getHairHeight(traits.hairStyle)}
             fill={hairHex}
             opacity="0.9"
             filter={`url(#fuzz-${traits.seed})`}
@@ -79,8 +79,8 @@ export default function TrollCard({ traits, size = "md", animate = true }: Troll
           <ellipse
             cx="140"
             cy="65"
-            rx={getHairWidth(traits.hairShape) * 0.5}
-            ry={getHairHeight(traits.hairShape) * 0.6}
+            rx={getHairWidth(traits.hairStyle) * 0.5}
+            ry={getHairHeight(traits.hairStyle) * 0.6}
             fill={hairHex}
             opacity="0.5"
             filter={`url(#fuzz-${traits.seed})`}
@@ -112,7 +112,7 @@ export default function TrollCard({ traits, size = "md", animate = true }: Troll
           <ellipse cx="190" cy="153" rx="8" ry="7" fill="#D4A574" opacity="0.4" />
 
           {/* EYES */}
-          {renderEyes(traits.eyeVariant)}
+          {renderEyes(traits.eyeStyle)}
 
           {/* NOSE — tiny dot */}
           <circle cx="150" cy="163" r="2.5" fill="#C49A6C" />
@@ -145,36 +145,36 @@ export default function TrollCard({ traits, size = "md", animate = true }: Troll
 
 // ── Helper Functions ──────────────────────────────────────
 
-function getHairWidth(shape: string): number {
+function getHairWidth(style: string): number {
   const map: Record<string, number> = {
     "perfect vertical spike": 35,
-    "soft rounded tower": 42,
-    "windblown lean": 40,
-    "wild static burst": 55,
-    "split spike": 45,
-    "curved swoop": 38,
-    "fluffy chaos spike": 50,
-    "ultra-straight collector spike": 30,
-    "slightly messy vintage frizz": 48,
-    "stacked high volume cone": 40,
+    "fluffy tower": 42,
+    "slightly windblown spike": 40,
+    "messy vintage frizz": 48,
+    "soft rounded spike": 38,
+    "wild explosion burst": 55,
+    "sleek swept back": 45,
+    "dual split spikes": 50,
+    "curly perm tower": 45,
+    "mohawk ridge": 30,
   };
-  return map[shape] || 40;
+  return map[style] || 40;
 }
 
-function getHairHeight(shape: string): number {
+function getHairHeight(style: string): number {
   const map: Record<string, number> = {
     "perfect vertical spike": 75,
-    "soft rounded tower": 65,
-    "windblown lean": 60,
-    "wild static burst": 55,
-    "split spike": 70,
-    "curved swoop": 68,
-    "fluffy chaos spike": 60,
-    "ultra-straight collector spike": 80,
-    "slightly messy vintage frizz": 55,
-    "stacked high volume cone": 72,
+    "fluffy tower": 65,
+    "slightly windblown spike": 60,
+    "messy vintage frizz": 55,
+    "soft rounded spike": 62,
+    "wild explosion burst": 55,
+    "sleek swept back": 50,
+    "dual split spikes": 70,
+    "curly perm tower": 68,
+    "mohawk ridge": 80,
   };
-  return map[shape] || 65;
+  return map[style] || 65;
 }
 
 function renderEyes(variant: string) {
