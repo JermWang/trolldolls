@@ -103,7 +103,7 @@ export function generateTraitRecipe(handle: string): TrollTraits {
     seed,
     hairColor: pick(traitPools.hairColors, rng),
     hairStyle: pick(traitPools.hairStyles, rng),
-    hat: pick(traitPools.hats, rng),
+    hat: rng() < 0.20 ? pick(traitPools.hats.filter(h => h !== "none"), rng) : "none",
     eyeStyle: pick(traitPools.eyeStyles, rng),
     mouth: pick(traitPools.mouths, rng),
     costume: pick(traitPools.costumes, rng),

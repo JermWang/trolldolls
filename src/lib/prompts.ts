@@ -44,7 +44,7 @@ function faceFragment(traits: TrollTraits): string {
 
 function hatFragment(traits: TrollTraits): string {
   if (traits.hat === "none") return "";
-  return `Hat/headwear: ${traits.hat}.`;
+  return `Hat/headwear: ${traits.hat}. IMPORTANT: The hair must interact realistically with the hat — hair should be compressed, tucked, or spilling out from under the hat naturally. Do NOT show hair clipping through or ignoring the hat. The hat sits on top of the head and the hair conforms around it.`;
 }
 
 function costumeFragment(traits: TrollTraits): string {
