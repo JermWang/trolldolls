@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "TROLLDOLLS — find ur inner troll",
+  title: "TROLLS — find ur inner troll",
   description:
     "type ur handle. get a troll. big hair energy only.",
   openGraph: {
-    title: "TROLLDOLLS — find ur inner troll",
+    title: "TROLLS — find ur inner troll",
     description: "every @ gets a troll. big hair. tiny chaos.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "TROLLDOLLS",
+    title: "TROLLS",
     description: "type ur handle. get a troll. its that simple.",
   },
 };

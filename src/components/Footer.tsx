@@ -20,7 +20,7 @@ export default function Footer() {
 
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="text-2xl font-bold text-white" style={{ fontFamily: "'Fredoka', sans-serif" }}>
-            TROLL<span className="text-yellow">DOLLS</span>
+            TROLLS
           </span>
 
           <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-bold text-white/80">
