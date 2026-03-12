@@ -1,26 +1,248 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFF8DC;
+  --foreground: #222222;
+  --pink: #FF69B4;
+  --pink-hot: #FF1493;
+  --purple: #9B5DE5;
+  --blue: #4488FF;
+  --green: #32CD32;
+  --yellow: #FFD700;
+  --orange: #FF6B35;
+  --red: #FF2D2D;
+  --cyan: #00CED1;
+  --lime: #7FFF00;
+  --white: #FFFFFF;
+  --black: #222222;
+  --tan: #DEB887;
+  --border: #222222;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-pink: var(--pink);
+  --color-pink-hot: var(--pink-hot);
+  --color-purple: var(--purple);
+  --color-blue: var(--blue);
+  --color-green: var(--green);
+  --color-yellow: var(--yellow);
+  --color-orange: var(--orange);
+  --color-red: var(--red);
+  --color-cyan: var(--cyan);
+  --color-lime: var(--lime);
+  --color-white: var(--white);
+  --color-black: var(--black);
+  --color-tan: var(--tan);
+  --color-border: var(--border);
+  --font-sans: 'Fredoka', sans-serif;
+  --font-comic: 'Comic Neue', cursive;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--pink) var(--background);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Fredoka', sans-serif;
+  cursor: default;
+}
+
+::selection {
+  background: var(--pink);
+  color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── MS Paint Aesthetic Utilities ── */
+
+.paint-border {
+  border: 3px solid var(--black);
+  border-radius: 0;
+}
+
+.wobbly-border {
+  border: 3.5px solid var(--black);
+  border-radius: 12px;
+}
+
+.crayon-shadow {
+  box-shadow: 4px 4px 0px var(--black);
+}
+
+.crayon-shadow-sm {
+  box-shadow: 3px 3px 0px var(--black);
+}
+
+.crayon-shadow-pink {
+  box-shadow: 4px 4px 0px var(--pink-hot);
+}
+
+.crayon-shadow-purple {
+  box-shadow: 4px 4px 0px var(--purple);
+}
+
+/* Wobbly rotation for scattered trolls */
+@keyframes wobble {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+.animate-wobble {
+  animation: wobble 4s ease-in-out infinite;
+}
+
+@keyframes wobble-slow {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+.animate-wobble-slow {
+  animation: wobble-slow 5s ease-in-out infinite;
+}
+
+/* Bouncy float for trolls */
+@keyframes bounce-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(2deg); }
+  75% { transform: translateY(-4px) rotate(-1deg); }
+}
+
+.animate-bounce-float {
+  animation: bounce-float 3s ease-in-out infinite;
+}
+
+/* Spinning for excitement */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+}
+
+.animate-wiggle {
+  animation: wiggle 0.8s ease-in-out infinite;
+}
+
+/* Dashed border like MS Paint selection */
+@keyframes marching-ants {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 16; }
+}
+
+.dashed-border {
+  border: 3px dashed var(--black);
+}
+
+/* Sticker peel effect */
+.sticker {
+  filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.3));
+  transition: transform 0.2s ease;
+}
+
+.sticker:hover {
+  transform: scale(1.1) rotate(3deg);
+}
+
+/* Rainbow text */
+.rainbow-text {
+  background: linear-gradient(90deg, #FF2D2D, #FF6B35, #FFD700, #32CD32, #4488FF, #9B5DE5, #FF69B4) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Hide scrollbar for gallery strip */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Gallery scroll animations */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.animate-scroll-left {
+  animation: scroll-left 30s linear infinite;
+}
+.animate-scroll-right {
+  animation: scroll-right 35s linear infinite;
+}
+
+/* Star burst decoration */
+.star-burst::before {
+  content: "✨";
+  position: absolute;
+  font-size: 1.5rem;
+}
+
+/* Notebook paper background */
+.notebook-bg {
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 31px,
+      #BCDEFF 31px,
+      #BCDEFF 32px
+    );
+  background-color: var(--white);
+}
+
+/* Checkerboard BG like MS Paint transparency */
+.checker-bg {
+  background-image:
+    linear-gradient(45deg, #eee 25%, transparent 25%),
+    linear-gradient(-45deg, #eee 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #eee 75%),
+    linear-gradient(-45deg, transparent 75%, #eee 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Floating trolls - drift across screen */
+@keyframes float-across {
+  0% {
+    transform: translateX(-150px) rotate(-5deg);
+  }
+  100% {
+    transform: translateX(calc(100vw + 150px)) rotate(5deg);
+  }
+}
+
+@keyframes float-bob {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(3deg);
+  }
+  50% {
+    transform: translateY(5px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+.animate-float-across {
+  animation: float-across linear infinite;
+}
+
+.animate-float-bob {
+  animation: float-bob ease-in-out infinite;
 }
