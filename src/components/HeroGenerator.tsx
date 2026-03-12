@@ -16,26 +16,53 @@ export default function HeroGenerator() {
   const [state, setState] = useState<GeneratorState>("idle");
   const [traits, setTraits] = useState<TrollTraits | null>(null);
   const [loadingMsg, setLoadingMsg] = useState("");
+  const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(null);
+  const [generationNotice, setGenerationNotice] = useState<string | null>(null);
 
   const generate = useCallback(async () => {
     const clean = handle.replace(/^@/, "").trim();
     if (!clean) return;
 
     setState("loading");
+    setGenerationNotice(null);
 
     for (let i = 0; i < 4; i++) {
       setLoadingMsg(LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)]);
       await new Promise((r) => setTimeout(r, 600));
     }
 
-    const result = generateTraitRecipe(clean);
-    setTraits(result);
-    setState("done");
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ handle: clean }),
+      });
+
+      if (!response.ok) {
+        throw new Error("API request failed");
+      }
+
+      const payload = await response.json();
+      const apiTraits = (payload?.traits as TrollTraits | undefined) || generateTraitRecipe(clean);
+
+      setTraits(apiTraits);
+      setGeneratedImageUrl(payload?.imageDataUrl || null);
+      setGenerationNotice(payload?.imageError || null);
+      setState("done");
+    } catch {
+      const fallbackTraits = generateTraitRecipe(clean);
+      setTraits(fallbackTraits);
+      setGeneratedImageUrl(null);
+      setGenerationNotice("Image model unavailable right now. Showing deterministic fallback.");
+      setState("done");
+    }
   }, [handle]);
 
   const reset = () => {
     setState("idle");
     setTraits(null);
+    setGeneratedImageUrl(null);
+    setGenerationNotice(null);
     setHandle("");
   };
 
@@ -49,6 +76,14 @@ export default function HeroGenerator() {
   };
 
   const downloadCard = () => {
+    if (generatedImageUrl) {
+      const link = document.createElement("a");
+      link.download = `troll-${traits?.handle || "doll"}.png`;
+      link.href = generatedImageUrl;
+      link.click();
+      return;
+    }
+
     const svg = document.querySelector("#troll-result svg");
     if (!svg) return;
     const svgData = new XMLSerializer().serializeToString(svg);
@@ -159,7 +194,6 @@ export default function HeroGenerator() {
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="text-black font-bold text-xl"
-                  style={{ fontFamily: "'Comic Neue', cursive" }}
                 >
                   {loadingMsg}
                 </motion.p>
@@ -190,8 +224,23 @@ export default function HeroGenerator() {
                     </div>
 
                     <div id="troll-result" className="animate-bounce-float">
-                      <TrollCard traits={traits} size="lg" />
+                      {generatedImageUrl ? (
+                        <img
+                          src={generatedImageUrl}
+                          alt="Generated OG troll"
+                          className="w-[260px] h-[260px] object-contain"
+                          draggable={false}
+                        />
+                      ) : (
+                        <TrollCard traits={traits} size="lg" />
+                      )}
                     </div>
+
+                    {generationNotice && (
+                      <p className="text-xs text-black/50 font-bold" style={{ fontFamily: "'Comic Neue', cursive" }}>
+                        {generationNotice}
+                      </p>
+                    )}
 
                     <div className="bg-yellow/50 border-3 border-black px-4 py-2 rounded-lg rotate-[-1deg]">
                       <p className="text-lg font-bold text-black">
