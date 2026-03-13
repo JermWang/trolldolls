@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import HeroGenerator from "@/components/HeroGenerator";
+import PfpGenerator from "@/components/PfpGenerator";
 import GalleryStrip from "@/components/GalleryStrip";
 import FloatingTrolls from "@/components/FloatingTrolls";
 import Footer from "@/components/Footer";
@@ -12,7 +12,7 @@ export default function Home() {
       
       <Navbar />
       <main className="relative z-10">
-        <HeroGenerator />
+        <PfpGenerator />
         <GalleryStrip />
       </main>
       <Footer />
