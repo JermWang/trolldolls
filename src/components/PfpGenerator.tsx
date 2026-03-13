@@ -269,7 +269,7 @@ export default function PfpGenerator() {
           {/* Trait selector rows */}
           <div className="w-full lg:w-[55%] flex flex-col gap-3">
             {CATEGORIES.map((cat) => (
-              <div key={cat.id} className="flex items-center gap-2">
+              <div key={cat.id} className="flex items-center gap-2 min-w-0">
                 {/* Category label */}
                 <div
                   className="w-16 shrink-0 text-center text-xs font-bold text-white bg-purple/60 backdrop-blur-sm rounded-lg py-1 border border-purple/30"
@@ -279,7 +279,7 @@ export default function PfpGenerator() {
                 </div>
 
                 {/* Option thumbnails */}
-                <div className="flex gap-2 overflow-x-auto hide-scrollbar py-1">
+                <div className="flex gap-2 overflow-x-auto hide-scrollbar py-1 flex-nowrap min-w-0">
                   {cat.options.map((option) => {
                     const isSelected = selections[cat.id] === option.id;
                     return (
