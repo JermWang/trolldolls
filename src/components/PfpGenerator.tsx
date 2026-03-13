@@ -182,7 +182,7 @@ export default function PfpGenerator() {
   return (
     <section
       id="generator"
-      className="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-6 md:px-10"
+      className="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-8 md:px-16"
     >
 
       <div className="relative z-10 w-full max-w-5xl mx-auto overflow-visible">
@@ -279,7 +279,7 @@ export default function PfpGenerator() {
                 </div>
 
                 {/* Option thumbnails */}
-                <div className="flex flex-wrap gap-2 py-1">
+                <div className="flex gap-2 overflow-x-auto hide-scrollbar py-1">
                   {cat.options.map((option) => {
                     const isSelected = selections[cat.id] === option.id;
                     return (
