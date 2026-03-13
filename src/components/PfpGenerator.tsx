@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback } from "react";
 import { Download, RotateCcw, Share2 } from "lucide-react";
 import Image from "next/image";
+import ContractCopy from "./ContractCopy";
 
 interface TraitOption {
   id: string;
@@ -170,9 +171,9 @@ export default function PfpGenerator() {
         if (opt) equipped.push(opt.label);
       }
     });
-    const desc = equipped.length > 0 ? equipped.join(" + ") : "a naked troll lol";
+    const desc = equipped.length > 0 ? equipped.join(" + ") : "just vibes";
     const text = encodeURIComponent(
-      `just made my custom troll 🧌\n\nrocking ${desc}\n\nmake urs`
+      `just built my troll pfp\n\ndrip check: ${desc}\n\nmake urs`
     );
     const url = encodeURIComponent("https://trolldolls.fun");
     window.open(`https://x.com/intent/tweet?text=${text}&url=${url}`, "_blank");
@@ -181,10 +182,10 @@ export default function PfpGenerator() {
   return (
     <section
       id="generator"
-      className="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-4 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-6 md:px-10"
     >
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto">
+      <div className="relative z-10 w-full max-w-5xl mx-auto overflow-visible">
         {/* Headline */}
         <div className="text-center mb-8">
           <h1 className="text-7xl md:text-[12rem] font-black leading-[0.85] mb-6 tracking-tight" style={{ fontFamily: "'Fredoka', sans-serif" }}>
@@ -204,7 +205,7 @@ export default function PfpGenerator() {
           <div className="w-full lg:w-[45%] flex flex-col items-center gap-4">
             <div
               ref={previewRef}
-              className="relative w-full aspect-square max-w-[420px] rounded-2xl overflow-hidden border-4 border-pink-hot bg-white shadow-[6px_6px_0px_rgba(155,93,229,0.6)]"
+              className="relative w-full aspect-square max-w-[380px] rounded-2xl overflow-hidden border-4 border-pink-hot bg-white shadow-[6px_6px_0px_rgba(155,93,229,0.6)]"
             >
               {/* Base troll character */}
               <Image
@@ -236,7 +237,7 @@ export default function PfpGenerator() {
             </div>
 
             {/* Action buttons */}
-            <div className="flex gap-3 w-full max-w-[420px]">
+            <div className="flex gap-3 w-full max-w-[380px]">
               <button
                 onClick={downloadPfp}
                 className="flex-1 flex items-center justify-center gap-2 py-3 bg-blue text-white font-bold border-3 border-black crayon-shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-sm rounded-lg"
@@ -261,6 +262,8 @@ export default function PfpGenerator() {
               <RotateCcw className="w-3.5 h-3.5" />
               reset all
             </button>
+
+            <ContractCopy />
           </div>
 
           {/* Trait selector rows */}
@@ -276,7 +279,7 @@ export default function PfpGenerator() {
                 </div>
 
                 {/* Option thumbnails */}
-                <div className="flex gap-2 overflow-x-auto hide-scrollbar py-1">
+                <div className="flex flex-wrap gap-2 py-1">
                   {cat.options.map((option) => {
                     const isSelected = selections[cat.id] === option.id;
                     return (

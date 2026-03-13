@@ -3,19 +3,19 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.trollsonsolana.xyz"),
-  title: "TROLLS — find ur inner troll",
+  title: "TROLLS — customise ur troll",
   description:
-    "type ur handle. get a troll. big hair energy only.",
+    "build ur own troll. pick the hair, drip, kicks & accessories. save it. flex it.",
   openGraph: {
-    title: "TROLLS — find ur inner troll",
-    description: "every @ gets a troll. big hair. tiny chaos.",
+    title: "TROLLS — customise ur troll",
+    description: "build ur own troll. pick the drip. save the pfp. flex on everyone.",
     type: "website",
     images: [{ url: "/trolls/trolls-banner.png" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "TROLLS",
-    description: "type ur handle. get a troll. its that simple.",
+    description: "build ur own troll. pick the hair, drip, kicks & accessories. save it. flex it.",
     images: ["/trolls/trolls-banner.png"],
   },
 };
