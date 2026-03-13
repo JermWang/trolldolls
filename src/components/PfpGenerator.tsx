@@ -65,7 +65,7 @@ const CATEGORIES: TraitCategory[] = [
   {
     id: "feet",
     label: "Shoes",
-    zIndex: 2,
+    zIndex: 1,
     options: [
       { id: "none", label: "None", thumb: "/pfp/common/placeholder-tile.webp", full: "" },
       { id: "adidas-blue", label: "Adidas Blue", thumb: "/pfp/feet/thumb/adidas-blue.webp", full: "/pfp/feet/full/adidas-blue.webp" },
