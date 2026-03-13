@@ -182,7 +182,7 @@ export default function PfpGenerator() {
   return (
     <section
       id="generator"
-      className="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-8 md:px-16"
+      className="relative min-h-screen flex items-center justify-center pt-20 pb-16"
     >
 
       <div className="relative z-10 w-full max-w-5xl mx-auto overflow-visible">
