@@ -33,12 +33,25 @@ export default function Navbar() {
           </a>
         </div>
 
-        <a
-          href="#generator"
-          className="px-3 py-1.5 md:px-5 md:py-2 bg-pink text-white text-xs md:text-base font-bold border-2 md:border-3 border-black crayon-shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all rounded-lg"
-        >
-          GET UR TROLL
-        </a>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <a
+            href="https://x.com/i/communities/2032483917899448654/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:hidden flex items-center justify-center w-8 h-8 bg-black text-white rounded-lg border-2 border-black"
+            title="Join our X Community"
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a
+            href="#generator"
+            className="px-3 py-1.5 md:px-5 md:py-2 bg-pink text-white text-xs md:text-base font-bold border-2 md:border-3 border-black crayon-shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all rounded-lg"
+          >
+            GET UR TROLL
+          </a>
+        </div>
       </div>
     </nav>
   );

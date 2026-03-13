@@ -182,30 +182,30 @@ export default function PfpGenerator() {
   return (
     <section
       id="generator"
-      className="relative min-h-screen flex items-center justify-center pt-20 pb-16"
+      className="relative min-h-screen flex items-center justify-center pt-16 pb-10 px-3 sm:px-4 lg:pt-20 lg:pb-16 lg:px-0"
     >
 
       <div className="relative z-10 w-full max-w-5xl mx-auto overflow-visible">
         {/* Headline */}
-        <div className="text-center mb-8">
-          <h1 className="text-7xl md:text-[12rem] font-black leading-[0.85] mb-6 tracking-tight" style={{ fontFamily: "'Fredoka', sans-serif" }}>
+        <div className="text-center mb-4 md:mb-8">
+          <h1 className="text-5xl sm:text-7xl md:text-[12rem] font-black leading-[0.85] mb-4 md:mb-6 tracking-tight" style={{ fontFamily: "'Fredoka', sans-serif" }}>
             <span className="rainbow-title" aria-label="TROLLS">
               <span className="rainbow-text rainbow-text-glow" aria-hidden="true">TROLLS</span>
               <span className="rainbow-text rainbow-text-main">TROLLS</span>
             </span>
           </h1>
-          <p className="text-lg md:text-xl text-black/60 max-w-md mx-auto font-medium" style={{ fontFamily: "'Comic Neue', cursive" }}>
+          <p className="text-base md:text-xl text-black/60 max-w-md mx-auto font-medium" style={{ fontFamily: "'Comic Neue', cursive" }}>
             type ur @ handle. get a troll.
           </p>
         </div>
 
         {/* Main generator area */}
-        <div className="flex flex-col lg:flex-row gap-6 items-start">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-start">
           {/* Preview area */}
-          <div className="w-full lg:w-[45%] flex flex-col items-center gap-4">
+          <div className="w-full lg:w-[45%] flex flex-col items-center gap-3 lg:gap-4">
             <div
               ref={previewRef}
-              className="relative w-full aspect-square max-w-[380px] rounded-2xl overflow-hidden border-4 border-pink-hot bg-white shadow-[6px_6px_0px_rgba(155,93,229,0.6)]"
+              className="relative w-full aspect-square max-w-[280px] sm:max-w-[320px] lg:max-w-[380px] rounded-2xl overflow-hidden border-4 border-pink-hot bg-white shadow-[6px_6px_0px_rgba(155,93,229,0.6)]"
             >
               {/* Base troll character */}
               <Image
@@ -237,7 +237,7 @@ export default function PfpGenerator() {
             </div>
 
             {/* Action buttons */}
-            <div className="flex gap-3 w-full max-w-[380px]">
+            <div className="flex gap-2 sm:gap-3 w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px]">
               <button
                 onClick={downloadPfp}
                 className="flex-1 flex items-center justify-center gap-2 py-3 bg-blue text-white font-bold border-3 border-black crayon-shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-sm rounded-lg"
@@ -267,12 +267,12 @@ export default function PfpGenerator() {
           </div>
 
           {/* Trait selector rows */}
-          <div className="w-full lg:w-[55%] flex flex-col gap-3">
+          <div className="w-full lg:w-[55%] flex flex-col gap-2 lg:gap-3">
             {CATEGORIES.map((cat) => (
               <div key={cat.id} className="flex items-center gap-2 min-w-0">
                 {/* Category label */}
                 <div
-                  className="w-16 shrink-0 text-center text-xs font-bold text-white bg-purple/60 backdrop-blur-sm rounded-lg py-1 border border-purple/30"
+                  className="w-14 sm:w-16 shrink-0 text-center text-[10px] sm:text-xs font-bold text-white bg-purple/60 backdrop-blur-sm rounded-lg py-1 border border-purple/30"
                   style={{ fontFamily: "'Comic Neue', cursive" }}
                 >
                   {cat.label}
@@ -286,7 +286,7 @@ export default function PfpGenerator() {
                       <button
                         key={option.id}
                         onClick={() => handleSelect(cat.id, option.id)}
-                        className={`relative w-14 h-14 md:w-16 md:h-16 shrink-0 rounded-xl overflow-hidden border-3 transition-all duration-150 ${
+                        className={`relative w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 shrink-0 rounded-lg sm:rounded-xl overflow-hidden border-2 sm:border-3 transition-all duration-150 ${
                           isSelected
                             ? "border-pink-hot shadow-[0_0_12px_rgba(255,20,147,0.5)] scale-105"
                             : "border-black/30 hover:border-pink/60 bg-white/80"
