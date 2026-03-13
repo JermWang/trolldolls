@@ -31,7 +31,7 @@ export default function Footer() {
             <a href="#about" className="hover:text-yellow transition-colors">wtf is this</a>
             <span className="text-white/30">·</span>
             <a
-              href="https://x.com"
+              href="https://x.com/i/communities/2032483917899448654/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-yellow transition-colors"

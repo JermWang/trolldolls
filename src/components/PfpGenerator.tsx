@@ -175,7 +175,7 @@ export default function PfpGenerator() {
     const text = encodeURIComponent(
       `just built my troll pfp\n\ndrip check: ${desc}\n\nmake urs`
     );
-    const url = encodeURIComponent("https://trolldolls.fun");
+    const url = encodeURIComponent("https://x.com/i/communities/2032483917899448654/");
     window.open(`https://x.com/intent/tweet?text=${text}&url=${url}`, "_blank");
   }, [selections]);
 
